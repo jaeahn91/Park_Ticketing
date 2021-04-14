@@ -23,30 +23,32 @@ public class RunCalculator {
 	}
 	
 	public int feeCal(int type, int age) {
+		OutputClass outputclass = new OutputClass();
+		String agetype = outputclass.ageType(age);
 		int fee = 0;
 		switch (type) {
 			case 1:
-				if (age >= 65) {
+				if (agetype.equals("경로")) {
 					fee = ConstValueClass.dpElderly;
-				} else if (age < 65 && age >= 19) {
+				} else if (agetype.equals("대인")) {
 					fee = ConstValueClass.dpAdult;
-				} else if (age < 19 && age >= 13) {
+				} else if (agetype.equals("청소년")) {
 					fee = ConstValueClass.dpTeen;
-				} else if (age < 13 && age >= 3) {
+				} else if (agetype.equals("소인")) {
 					fee = ConstValueClass.dpKid;
-				} else {
+				} else if (agetype.equals("유아(무료)")){
 					fee = 0;
 				} break;
 			case 2:
-				if (age >= 65) {
+				if (agetype.equals("경로")) {
 					fee = ConstValueClass.npElderly;
-				} else if (age < 65 && age >= 19) {
+				} else if (agetype.equals("대인")) {
 					fee = ConstValueClass.npAdult;
-				} else if (age < 19 && age >= 13) {
+				} else if (agetype.equals("청소년")) {
 					fee = ConstValueClass.npTeen;
-				} else if (age < 13 && age >= 3) {
+				} else if (agetype.equals("소인")) {
 					fee = ConstValueClass.npKid;
-				} else {
+				} else if (agetype.equals("유아(무료)")){
 					fee = 0;
 				} break;
 		}

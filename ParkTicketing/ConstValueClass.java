@@ -27,6 +27,7 @@ public class ConstValueClass {
 //	public static final int past4ParkBaby = 15000; // 12개월이상 36개월미만. 12개월미만은 무료
 //	
 //	
+
 	
 	public static final int dpAdult = 56000; // 19~64세
 	public static final int dpTeen = 47000; // 13~18세

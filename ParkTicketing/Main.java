@@ -33,6 +33,8 @@ public class Main {
 		OutputClass outclass = new OutputClass();
 		outclass.printPrice(dcFee);
 		
+		
+		
 		nextRound = outclass.nextRound();
 		} while (nextRound == 1);
 		

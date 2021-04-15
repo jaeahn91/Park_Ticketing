@@ -60,7 +60,7 @@ public class RunCalculator {
 		switch (option) {
 			case 1: break;
 			case 2: dcFee = (int)((fee * (1 - ConstValueClass.prefDisabled)) / 10 * 10); break;
-			case 3: dcFee = (int)((fee * (1 - ConstValueClass.prefMerit)) / 10 * 10); break;
+			case 3: dcFee = (int)((fee * (1 - ConstValueClass.prefNatMerit)) / 10 * 10); break;
 			case 4: dcFee = (int)((fee * (1 - ConstValueClass.prefManyKids)) / 10 * 10); break;
 			case 5: dcFee = (int)((fee * (1 - ConstValueClass.prefPregnant)) / 10 * 10); break;
 		}

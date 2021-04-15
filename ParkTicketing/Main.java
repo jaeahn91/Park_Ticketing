@@ -40,7 +40,7 @@ public class Main {
 			outclass.printPrice(dcFee);
 			
 			totalfee += dcFee;
-			transaction += outclass.receipt(type, ageType, numTicket,fee, prefType);
+			transaction += outclass.receipt(type, ageType, numTicket, dcFee, prefType);
 			
 			nextRound = outclass.nextRound();
 			
@@ -51,6 +51,7 @@ public class Main {
 				outclass.endofReceipt();
 				exitproceed = outclass.exitorProceed();
 				transaction = "";
+				totalfee = 0;
 				if (exitproceed == 2) {
 					break;
 				} 

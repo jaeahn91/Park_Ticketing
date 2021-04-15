@@ -72,7 +72,7 @@ public class OutputClass {
 			pref = "임산부 우대적용";
 		}
 		
-		String transaction = String.format("%s %s X %d% d원 *%s\n", 
+		String transaction = String.format("%s %s X %d %d원 *%s\n", 
 				ticketType, ageType, numTicket, fee, pref);
 		
 		return transaction;

@@ -1,64 +1,73 @@
 package ParkTicketing;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+
+
 public class Main {
-	
-	public static void main(String[] args) {
+
+	public static int type, numTickets, prefType, age, type_ageCohort, fee, fee_ActuallyPaid;
+	public static int totalfee, nextRound, exitproceed;
+	public static String idNumber, ageCohort, transaction;
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		
-		int type = 0;
-		int numTicket = 0;
-		int prefType = 0;
-		int age = 0;
-		int fee = 0;
-		int dcFee = 0;
-		int totalfee = 0;
-		int nextRound = 0;
-		int exitproceed = 0;
-		String idNumber;
-		String ageType;
-		String transaction = "";
 		
 		InputClass inputclass = new InputClass();
 		RunCalculator run = new RunCalculator();
 		OutputClass outclass = new OutputClass();
-		
-		while(true) {
-	
-			type = inputclass.ticketType();
-			idNumber = inputclass.numID();
-			numTicket = inputclass.numTickets();
-			prefType = inputclass.prefOptions();
-			
-			age = run.ageCal(idNumber);
-			fee = run.feeCal(type, age);
-			dcFee = run.prefCal(fee, prefType);
-			dcFee = numTicket * dcFee;
-			ageType = outclass.ageType(age);
-	
-			outclass.printPrice(dcFee);
-			
-			totalfee += dcFee;
-			transaction += outclass.receipt(type, ageType, numTicket, dcFee, prefType);
-			
-			nextRound = outclass.nextRound();
-			
-			if (nextRound == 2) {
-				outclass.startofReceipt();
-				System.out.println(transaction);
-				outclass.receiptTotal(totalfee);
-				outclass.endofReceipt();
-				exitproceed = outclass.exitorProceed();
-				transaction = "";
-				totalfee = 0;
-				if (exitproceed == 2) {
-					break;
-				} 
-			} 
-			
-		}
 
-	}
+//		ReadCSV read = new ReadCSV();
+		int sellbyType [][]; // 권종별 판매내역 저장
+
+
+			while(true) {
+		
+				type = inputclass.ticketType();
+				idNumber = inputclass.numID();
+				
+				numTickets = inputclass.numTickets();
+				
+				prefType = inputclass.prefOptions();
+				
+				age = run.ageCal(idNumber);
+				type_ageCohort = run.type_AgeCohort(age);
+				fee = run.feeCal(type, age);
+				fee_ActuallyPaid = run.prefCal(fee, prefType);
+				fee_ActuallyPaid = numTickets * fee_ActuallyPaid;
+				ageCohort = outclass.printAgeCohort(age);
+		
+				outclass.printPrice(fee_ActuallyPaid);
+				
+				totalfee += fee_ActuallyPaid;
+				run.savingFormat(type, age, numTickets, fee_ActuallyPaid, prefType, ConstValueClass.csInfoArr);
+				transaction += outclass.receipt(type, ageCohort, numTickets, fee_ActuallyPaid, prefType);
+				
+
+				nextRound = inputclass.nextRound();
+				
+				if (nextRound == 2) {
+					outclass.startofReceipt();
+					System.out.println(transaction);
+					outclass.receiptTotal(totalfee);
+					outclass.endofReceipt();
+					exitproceed = inputclass.exitorProceed();
+					transaction = "";
+					totalfee = 0;
+					if (exitproceed == 2) {
+						outclass.saveFile(ConstValueClass.csInfoArr);
+
+						break;
+					} 
+	
+				} 				
+
+			} 
+		} 
+		
+//		sellbyType = read.parseTicketData();
+//		outclass.printSellingData(sellbyType);
+
+//	}
 
 }

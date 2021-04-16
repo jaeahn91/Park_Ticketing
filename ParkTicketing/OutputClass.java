@@ -1,13 +1,27 @@
 package ParkTicketing;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class OutputClass {
 	private Scanner scan = null;
-		
-	public OutputClass() {
+	public RunCalculator run = null;
+	Calendar cal = null;
+	SimpleDateFormat sdt = null;
+	public OutputClass() throws IOException {
 		scan = new Scanner(System.in);
+		run = new RunCalculator();
+		cal = Calendar.getInstance();
+		sdt = new SimpleDateFormat("yyyyMMdd");
 	}
+	
+	
 	public void printPrice(int finalPrice) {
 		
 		System.out.printf("가격은 %d원 입니다.\n감사합니다.\n", finalPrice);
@@ -17,32 +31,19 @@ public class OutputClass {
 		System.out.println("잘못 입력하셨습니다");
 	}
 	
-	public int nextRound() {
-		int nextRound;
-		System.out.printf("계속 발권하시겠습니까?\n1: 티켓 발권\n2: 종료\n");
-		nextRound = scan.nextInt();
-		return nextRound;
-	}
-
-	public int exitorProceed() {
-		int exitproceed;
-		System.out.printf("계속 진행(1: 새로운 주문, 2: 프로그램 종료) : ");
-		exitproceed = scan.nextInt();
-		return exitproceed;
-	}
 	
-	public String ageType(int age) {
-		String type;
+	public String printAgeCohort(int age) {
+		String type = "";
 		if (age >= 65) {
-			type = "경로";
+			type = ConstValueClass.cohort_ELDERLY; // 노인
 		} else if (age < 65 && age >= 19) {
-			type = "대인";
+			type = ConstValueClass.cohort_ADULT; // 어른
 		} else if (age < 19 && age >= 13) {
-			type = "청소년";
+			type = ConstValueClass.cohort_TEEN; // 청소년
 		} else if (age < 13 && age >= 3) {
-			type = "소인";
+			type = ConstValueClass.cohort_CHILD; // 어린이
 		} else {
-			type = "유아(무료)";
+			type = ConstValueClass.cohort_INFANT + "(무료)"; // 유아(무료)
 		}
 		return type;
 	}
@@ -60,15 +61,15 @@ public class OutputClass {
 		}
 		
 		String pref = "";
-		if (prefType == 1) {
+		if (prefType == ConstValueClass.type_NoPref) {
 			pref = "우대적용 없음";
-		} else if (prefType == 2) {
+		} else if (prefType == ConstValueClass.type_Disabled) {
 			pref = "장애인 우대적용";
-		} else if (prefType == 3) {
+		} else if (prefType == ConstValueClass.type_NatMerit) {
 			pref = "국가유공자 우대적용";
-		} else if (prefType == 4) {
+		} else if (prefType == ConstValueClass.type_ManyKids) {
 			pref = "다자녀 우대적용";
-		} else if (prefType == 5) {
+		} else if (prefType == ConstValueClass.type_Pregnant) {
 			pref = "임산부 우대적용";
 		}
 		
@@ -86,4 +87,36 @@ public class OutputClass {
 	public void endofReceipt() {
 		System.out.println("==============================================\n");
 	}
+	
+	public void saveFile(ArrayList<Customer> csInfoArr) throws IOException {
+		// 날짜,권종,연령구분,수량,가격,우대사항 
+		// ex)20210415,주간권,대인,1,56000,없음
+		BufferedWriter bw = new BufferedWriter
+				(new OutputStreamWriter(new FileOutputStream(ConstValueClass.savePATH, true), "MS949"));
+		
+		String text = "";
+		for (int i = 0; i < csInfoArr.size(); i++) {
+			Customer info = csInfoArr.get(i);
+			text += info.getDate() +"," +info.getTicketType() + "," + info.getAgeCohortType()
+					+"," + info.getNumTickets() +"," + info.getTicketPrice() +"," +info.getPrefType() + "\n";
+			bw.write(text);
+			text = "";
+		}
+		bw.close();
+	}
+	
+	public void printSellingData(int sellbyType[][]) {
+		System.out.printf("\n================== 권종 별 판매현황 ==================\n");
+		System.out.printf("주간권 총 %s매\n", sellbyType[0][0]);
+		System.out.printf("유아 %s매, 어린이 %s매, 청소년 %s매, 어른 %s매, 노인 %s매\n",
+				sellbyType[0][1], sellbyType[0][2], sellbyType[0][3], sellbyType[0][4], sellbyType[0][5]);
+		System.out.printf("주간권 매출 : %s원\n\n", sellbyType[0][6]);
+		System.out.printf("야간권 총 %s매\n", sellbyType[1][0]);
+		System.out.printf("유아 %s매, 어린이 %s매, 청소년 %s매, 어른 %s매, 노인 %s매\n",
+				sellbyType[1][1], sellbyType[1][2], sellbyType[1][3], sellbyType[1][4], sellbyType[1][5]);
+		System.out.printf("야간권 매출 : %s원\n", sellbyType[1][6]);
+		System.out.printf("----------------------------------------------------");
+	}
+	
+
 }

@@ -1,17 +1,19 @@
 package ParkTicketing;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class RunCalculator {
 	Calendar cal = Calendar.getInstance();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 	
-	public int ageCal(String ssnInput) {
-		int birthYear = Integer.parseInt(ssnInput.substring(0, 2));
-		int current = Integer.parseInt(sdf.format(cal.getTime()));
-		int centuryDiv = Integer.parseInt(ssnInput.substring(6, 7));
+	public int ageCal(String idnInput) {
+		int birthYear = Integer.parseInt(idnInput.substring(0, 2));
+		int current = Integer.parseInt(sdf.format(cal.getTime()).substring(0, 4));
+		int centuryDiv = Integer.parseInt(idnInput.substring(6, 7));
 		int age = 0;
 		
 		if (centuryDiv == 1 || centuryDiv == 2) {
@@ -22,33 +24,32 @@ public class RunCalculator {
 		return age;
 	}
 	
-	public int feeCal(int type, int age) {
-		OutputClass outputclass = new OutputClass();
-		String agetype = outputclass.ageType(age);
+	public int feeCal(int ticketType, int age) throws IOException {
+		int ageType = type_AgeCohort(age);
 		int fee = 0;
-		switch (type) {
+		switch (ticketType) {
 			case 1:
-				if (agetype.equals("경로")) {
+				if (ageType == ConstValueClass.type_ELDERLY) {
 					fee = ConstValueClass.dpElderly;
-				} else if (agetype.equals("대인")) {
+				} else if (ageType == ConstValueClass.type_ADULT) {
 					fee = ConstValueClass.dpAdult;
-				} else if (agetype.equals("청소년")) {
+				} else if (ageType == ConstValueClass.type_TEEN) {
 					fee = ConstValueClass.dpTeen;
-				} else if (agetype.equals("소인")) {
-					fee = ConstValueClass.dpKid;
-				} else if (agetype.equals("유아(무료)")){
+				} else if (ageType == ConstValueClass.type_CHILD) {
+					fee = ConstValueClass.dpChild;
+				} else if (ageType == ConstValueClass.type_INFANT){
 					fee = 0;
 				} break;
 			case 2:
-				if (agetype.equals("경로")) {
+				if (ageType == ConstValueClass.type_ELDERLY) {
 					fee = ConstValueClass.npElderly;
-				} else if (agetype.equals("대인")) {
+				} else if (ageType == ConstValueClass.type_ADULT) {
 					fee = ConstValueClass.npAdult;
-				} else if (agetype.equals("청소년")) {
+				} else if (ageType == ConstValueClass.type_TEEN) {
 					fee = ConstValueClass.npTeen;
-				} else if (agetype.equals("소인")) {
-					fee = ConstValueClass.npKid;
-				} else if (agetype.equals("유아(무료)")){
+				} else if (ageType == ConstValueClass.type_CHILD) {
+					fee = ConstValueClass.npChild;
+				} else if (ageType == ConstValueClass.type_INFANT){
 					fee = 0;
 				} break;
 		}
@@ -67,5 +68,79 @@ public class RunCalculator {
 		return dcFee;
 	}
 
+	public int type_AgeCohort(int age) {
+		if (age < ConstValueClass.MIN_CHILD) {
+			return ConstValueClass.type_INFANT;
+		} else if ((age >= ConstValueClass.MIN_CHILD) && (age <= ConstValueClass.MAX_CHILD)) {
+			return ConstValueClass.type_CHILD;
+		} else if ((age >= ConstValueClass.MIN_TEEN) && (age <= ConstValueClass.MAX_TEEN)) {
+			return ConstValueClass.type_TEEN;
+		} else if ((age >= ConstValueClass.MIN_ADULT) && (age <= ConstValueClass.MAX_ADULT)) {
+			return ConstValueClass.type_ADULT;
+		} else if (age > ConstValueClass.MAX_ADULT) {
+			return ConstValueClass.type_ELDERLY;
+		} else {
+			return 0;
+		}
+	}
+	
+	public void savingFormat(int ticketType, int age, int numTickets, int fee, int prefType,
+			ArrayList<Customer> csInfoArr) {
+	
+				int agetype = 0;
+				agetype = type_AgeCohort(age); 
+				
+				Customer csInfo = new Customer();
+				
+				csInfo.setDate(sdf.format(cal.getTime()));
+				csInfo.setTicketType(ticketType);
+				csInfo.setAgeCohortType(agetype);
+				csInfo.setNumTickets(numTickets);
+				csInfo.setTicketPrice(fee);
+				csInfo.setPrefType(prefType);
+
+//				
+//				switch (agetype) {
+//				case 1:
+//					csInfo.setAgeCohortType(ConstValueClass.type_INFANT);
+//				case 2:
+//					csInfo.setAgeCohortType(ConstValueClass.type_CHILD);
+//				case 3:
+//					csInfo.setAgeCohortType(ConstValueClass.type_TEEN);
+//				case 4:
+//					csInfo.setAgeCohortType(ConstValueClass.type_ADULT);
+//				case 5:
+//					csInfo.setAgeCohortType(ConstValueClass.type_ELDERLY);
+//				default:
+//					break;
+//				}
+//			
+				
+				switch (ticketType) {
+				case 1:
+					csInfo.setTicketName(ConstValueClass.DAYPASS);
+				case 2:
+					csInfo.setTicketName(ConstValueClass.NIGHTPASS);
+				default:
+					break;
+				}
+				
+				switch (prefType) {
+				case 1:
+					csInfo.setPrefOption(ConstValueClass.pref_NONE);
+				case 2:
+					csInfo.setPrefOption(ConstValueClass.pref_DISABLED);
+				case 3:
+					csInfo.setPrefOption(ConstValueClass.pref_NatMERIT);
+				case 4:
+					csInfo.setPrefOption(ConstValueClass.pref_ManyKIDS);
+				case 5:
+					csInfo.setPrefOption(ConstValueClass.pref_PREGNANT);
+				default:
+					break;
+				}
+				csInfoArr.add(csInfo);
+				
+	}
 	
 }

@@ -55,9 +55,9 @@ public class OutputClass {
 	public String receipt(int type, String ageType, int numTicket, int fee, int prefType) {
 		String ticketType = "";
 		if (type == 1) {
-			ticketType = "주간권";
+			ticketType = ConstValueClass.DAYPASS; // 주간권
 		} else if (type == 2) {
-			ticketType = "야간권";
+			ticketType = ConstValueClass.NIGHTPASS; // 야간권
 		}
 		
 		String pref = "";
@@ -89,16 +89,14 @@ public class OutputClass {
 	}
 	
 	public void saveFile(ArrayList<Customer> csInfoArr) throws IOException {
-		// 날짜,권종,연령구분,수량,가격,우대사항 
+		// 날짜,권종,연령구분,수량,가격,우대사항
 		// ex)20210415,주간권,대인,1,56000,없음
-		BufferedWriter bw = new BufferedWriter
-				(new OutputStreamWriter(new FileOutputStream(ConstValueClass.savePATH, true), "MS949"));
-		
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ConstValueClass.savePATH, true), "MS949"));
 		String text = "";
 		for (int i = 0; i < csInfoArr.size(); i++) {
 			Customer info = csInfoArr.get(i);
-			text += info.getDate() +"," +info.getTicketType() + "," + info.getAgeCohortType()
-					+"," + info.getNumTickets() +"," + info.getTicketPrice() +"," +info.getPrefType() + "\n";
+			text += info.getDate() + "," + info.getTicketType() + "," + info.getAgeCohortType() + 
+					"," + info.getNumTickets() + "," + info.getTicketPrice() + "," + info.getPrefType() + "\n";
 			bw.write(text);
 			text = "";
 		}

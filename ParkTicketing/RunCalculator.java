@@ -10,21 +10,25 @@ public class RunCalculator {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 	
-	public int ageCal(String idnInput) {
+	public int ageCal(String idnInput) { 
+		// receives identification number from the user as input through console
+		// calculates and returns age in integer
 		int birthYear = Integer.parseInt(idnInput.substring(0, 2));
 		int current = Integer.parseInt(sdf.format(cal.getTime()).substring(0, 4));
 		int centuryDiv = Integer.parseInt(idnInput.substring(6, 7));
 		int age = 0;
 		
 		if (centuryDiv == 1 || centuryDiv == 2) {
-			age = current - (birthYear + 1900) + 1; // 21세기 이전 출생자 나이계산
+			age = current - (birthYear + 1900) + 1; // if born before the year 2000
 		} else if (centuryDiv == 3 || centuryDiv == 4){
-			age = current - (birthYear + 2000) + 1; // 21세기 출생자 나이계산
+			age = current - (birthYear + 2000) + 1; // if born in the year 2000 or afterwards
 		}
 		return age;
 	}
 	
-	public int feeCal(int ticketType, int age) throws IOException {
+	public int feeCal(int ticketType, int age) throws IOException { 
+		// receives ticket type and age data from the user as input through console
+		// returns ticket price before getting preferential discount
 		int ageType = type_AgeCohort(age);
 		int fee = 0;
 		switch (ticketType) {
@@ -56,7 +60,8 @@ public class RunCalculator {
 		return fee;
 	}
 	
-	public int prefCal(int fee, int option) {
+	public int prefCal(int fee, int option) { 
+		// receives fee and preferential discount option data and returns discounted ticket price in integer
 		int dcFee = fee;
 		switch (option) {
 			case 1: break;
@@ -68,7 +73,8 @@ public class RunCalculator {
 		return dcFee;
 	}
 
-	public int type_AgeCohort(int age) {
+	public int type_AgeCohort(int age) { 
+		// receives age data and returns age cohort type the customer belongs in integer
 		if (age < ConstValueClass.MIN_CHILD) {
 			return ConstValueClass.type_INFANT;
 		} else if ((age >= ConstValueClass.MIN_CHILD) && (age <= ConstValueClass.MAX_CHILD)) {
@@ -84,63 +90,43 @@ public class RunCalculator {
 		}
 	}
 	
-	public void savingFormat(int ticketType, int age, int numTickets, int fee, int prefType,
-			ArrayList<Customer> csInfoArr) {
-	
-				int agetype = 0;
-				agetype = type_AgeCohort(age); 
-				
-				Customer csInfo = new Customer();
-				
-				csInfo.setDate(sdf.format(cal.getTime()));
-				csInfo.setTicketType(ticketType);
-				csInfo.setAgeCohortType(agetype);
-				csInfo.setNumTickets(numTickets);
-				csInfo.setTicketPrice(fee);
-				csInfo.setPrefType(prefType);
-
-//				
-//				switch (agetype) {
-//				case 1:
-//					csInfo.setAgeCohortType(ConstValueClass.type_INFANT);
-//				case 2:
-//					csInfo.setAgeCohortType(ConstValueClass.type_CHILD);
-//				case 3:
-//					csInfo.setAgeCohortType(ConstValueClass.type_TEEN);
-//				case 4:
-//					csInfo.setAgeCohortType(ConstValueClass.type_ADULT);
-//				case 5:
-//					csInfo.setAgeCohortType(ConstValueClass.type_ELDERLY);
-//				default:
-//					break;
-//				}
-//			
-				
-				switch (ticketType) {
-				case 1:
-					csInfo.setTicketName(ConstValueClass.DAYPASS);
-				case 2:
-					csInfo.setTicketName(ConstValueClass.NIGHTPASS);
-				default:
-					break;
-				}
-				
-				switch (prefType) {
-				case 1:
-					csInfo.setPrefOption(ConstValueClass.pref_NONE);
-				case 2:
-					csInfo.setPrefOption(ConstValueClass.pref_DISABLED);
-				case 3:
-					csInfo.setPrefOption(ConstValueClass.pref_NatMERIT);
-				case 4:
-					csInfo.setPrefOption(ConstValueClass.pref_ManyKIDS);
-				case 5:
-					csInfo.setPrefOption(ConstValueClass.pref_PREGNANT);
-				default:
-					break;
-				}
-				csInfoArr.add(csInfo);
-				
+	public void savingFormat(int ticketType, int age, int numTickets, int fee, int prefType, 
+			ArrayList<Customer> csInfoArr) { 
+		// feeds data to the created data structure that will be exported into a csv file
+		int agetype = 0;
+		agetype = type_AgeCohort(age);
+		
+		Customer csInfo = new Customer();
+		csInfo.setDate(sdf.format(cal.getTime()));
+		csInfo.setTicketType(ticketType);
+		csInfo.setAgeCohortType(agetype);
+		csInfo.setNumTickets(numTickets);
+		csInfo.setTicketPrice(fee);
+		csInfo.setPrefType(prefType);
+		
+		switch (ticketType) {
+			case 1:
+				csInfo.setTicketName(ConstValueClass.DAYPASS);
+			case 2:
+				csInfo.setTicketName(ConstValueClass.NIGHTPASS);
+			default:
+				break;
+		}
+		switch (prefType) {
+			case 1:
+				csInfo.setPrefOption(ConstValueClass.pref_NONE);
+			case 2:
+				csInfo.setPrefOption(ConstValueClass.pref_DISABLED);
+			case 3:
+				csInfo.setPrefOption(ConstValueClass.pref_NatMERIT);
+			case 4:
+				csInfo.setPrefOption(ConstValueClass.pref_ManyKIDS);
+			case 5:
+				csInfo.setPrefOption(ConstValueClass.pref_PREGNANT);
+			default:
+				break;
+		}
+		csInfoArr.add(csInfo);
 	}
 	
 }

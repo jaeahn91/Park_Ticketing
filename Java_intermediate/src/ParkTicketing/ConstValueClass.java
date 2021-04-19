@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class ConstValueClass {
 	
-	public static final int dpAdult = 56000; // 19~64¼¼
-	public static final int dpTeen = 47000; // 13~18¼¼
-	public static final int dpChild = 44000; // 3~12¼¼
-	public static final int dpElderly = 44000; // 65¼¼ ÀÌ»ó
+	public static final int dpAdult = 56000; // 19~64ì„¸
+	public static final int dpTeen = 47000; // 13~18ì„¸
+	public static final int dpChild = 44000; // 3~12ì„¸
+	public static final int dpElderly = 44000; // 65ì„¸ ì´ìƒ
 	
-	public static final int npAdult = 46000; // 19~64¼¼
-	public static final int npTeen = 40000; // 13~18¼¼
-	public static final int npChild = 37000; // 3~12¼¼
-	public static final int npElderly = 37000; // 65¼¼ ÀÌ»ó
+	public static final int npAdult = 46000; // 19~64ì„¸
+	public static final int npTeen = 40000; // 13~18ì„¸
+	public static final int npChild = 37000; // 3~12ì„¸
+	public static final int npElderly = 37000; // 65ì„¸ ì´ìƒ
 	
 	public static final int type_NoPref = 1;
 	public static final int type_Disabled = 2;
@@ -41,20 +41,20 @@ public class ConstValueClass {
 	public static final int MIN_ID_DIGITS = 1;
 	
 	
-	public static final String DAYPASS = "ÁÖ°£±Ç"; 
-	public static final String NIGHTPASS = "¾ß°£±Ç";
+	public static final String DAYPASS = "ì£¼ê°„ê¶Œ"; 
+	public static final String NIGHTPASS = "ì•¼ê°„ê¶Œ";
 	
-	public static final String cohort_INFANT = "À¯¾Æ";
-	public static final String cohort_CHILD = "¾î¸°ÀÌ";
-	public static final String cohort_TEEN = "Ã»¼Ò³â";
-	public static final String cohort_ADULT = "¾î¸¥";
-	public static final String cohort_ELDERLY = "³ëÀÎ";
+	public static final String cohort_INFANT = "ìœ ì•„";
+	public static final String cohort_CHILD = "ì–´ë¦°ì´";
+	public static final String cohort_TEEN = "ì²­ì†Œë…„";
+	public static final String cohort_ADULT = "ì–´ë¥¸";
+	public static final String cohort_ELDERLY = "ë…¸ì¸";
 
-	public static final String pref_NONE = "¾øÀ½";
-	public static final String pref_DISABLED = "Àå¾ÖÀÎ";
-	public static final String pref_NatMERIT = "±¹°¡À¯°øÀÚ";
-	public static final String pref_ManyKIDS = "´ÙÀÚ³à";
-	public static final String pref_PREGNANT = "ÀÓ»êºÎ";
+	public static final String pref_NONE = "ì—†ìŒ";
+	public static final String pref_DISABLED = "ì¥ì• ì¸";
+	public static final String pref_NatMERIT = "êµ­ê°€ìœ ê³µì";
+	public static final String pref_ManyKIDS = "ë‹¤ìë…€";
+	public static final String pref_PREGNANT = "ì„ì‚°ë¶€";
 	
 	public static final int type_INFANT = 1;
 	public static final int type_CHILD = 2;

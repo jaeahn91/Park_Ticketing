@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import ExchangeProgram.ConstValueClass;
 
 public class WriteClass {
 

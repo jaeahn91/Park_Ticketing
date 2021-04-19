@@ -24,56 +24,56 @@ public class OutputClass {
 	
 	public void printPrice(int finalPrice) {
 		
-		System.out.printf("°¡°İÀº %d¿ø ÀÔ´Ï´Ù.\n°¨»çÇÕ´Ï´Ù.\n", finalPrice);
+		System.out.printf("ê°€ê²©ì€ %dì› ì…ë‹ˆë‹¤.\nê°ì‚¬í•©ë‹ˆë‹¤.\n", finalPrice);
 	}
 	
 	public void printError() {
-		System.out.println("Àß¸ø ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù");
+		System.out.println("ì˜ëª» ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤");
 	}
 	
 	
 	public String printAgeCohort(int age) {
 		String type = "";
 		if (age >= 65) {
-			type = ConstValueClass.cohort_ELDERLY; // ³ëÀÎ
+			type = ConstValueClass.cohort_ELDERLY; // ë…¸ì¸
 		} else if (age < 65 && age >= 19) {
-			type = ConstValueClass.cohort_ADULT; // ¾î¸¥
+			type = ConstValueClass.cohort_ADULT; // ì–´ë¥¸
 		} else if (age < 19 && age >= 13) {
-			type = ConstValueClass.cohort_TEEN; // Ã»¼Ò³â
+			type = ConstValueClass.cohort_TEEN; // ì²­ì†Œë…„
 		} else if (age < 13 && age >= 3) {
-			type = ConstValueClass.cohort_CHILD; // ¾î¸°ÀÌ
+			type = ConstValueClass.cohort_CHILD; // ì–´ë¦°ì´
 		} else {
-			type = ConstValueClass.cohort_INFANT + "(¹«·á)"; // À¯¾Æ(¹«·á)
+			type = ConstValueClass.cohort_INFANT + "(ë¬´ë£Œ)"; // ìœ ì•„(ë¬´ë£Œ)
 		}
 		return type;
 	}
 	
 	public void startofReceipt() {
-		System.out.println("================== Æú¸®·£µå ==================");
+		System.out.println("================== í´ë¦¬ëœë“œ ==================");
 	}
 	
 	public String receipt(int type, String ageType, int numTicket, int fee, int prefType) {
 		String ticketType = "";
 		if (type == 1) {
-			ticketType = ConstValueClass.DAYPASS; // ÁÖ°£±Ç
+			ticketType = ConstValueClass.DAYPASS; // ì£¼ê°„ê¶Œ
 		} else if (type == 2) {
-			ticketType = ConstValueClass.NIGHTPASS; // ¾ß°£±Ç
+			ticketType = ConstValueClass.NIGHTPASS; // ì•¼ê°„ê¶Œ
 		}
 		
 		String pref = "";
 		if (prefType == ConstValueClass.type_NoPref) {
-			pref = "¿ì´ëÀû¿ë ¾øÀ½";
+			pref = "ìš°ëŒ€ì ìš© ì—†ìŒ";
 		} else if (prefType == ConstValueClass.type_Disabled) {
-			pref = "Àå¾ÖÀÎ ¿ì´ëÀû¿ë";
+			pref = "ì¥ì• ì¸ ìš°ëŒ€ì ìš©";
 		} else if (prefType == ConstValueClass.type_NatMerit) {
-			pref = "±¹°¡À¯°øÀÚ ¿ì´ëÀû¿ë";
+			pref = "êµ­ê°€ìœ ê³µì ìš°ëŒ€ì ìš©";
 		} else if (prefType == ConstValueClass.type_ManyKids) {
-			pref = "´ÙÀÚ³à ¿ì´ëÀû¿ë";
+			pref = "ë‹¤ìë…€ ìš°ëŒ€ì ìš©";
 		} else if (prefType == ConstValueClass.type_Pregnant) {
-			pref = "ÀÓ»êºÎ ¿ì´ëÀû¿ë";
+			pref = "ì„ì‚°ë¶€ ìš°ëŒ€ì ìš©";
 		}
 		
-		String transaction = String.format("%s %s X %d %d¿ø *%s\n", 
+		String transaction = String.format("%s %s X %d %dì› *%s\n", 
 				ticketType, ageType, numTicket, fee, pref);
 		
 		return transaction;
@@ -81,7 +81,7 @@ public class OutputClass {
 	
 	public void receiptTotal(int totalFee) {
 		System.out.println();
-		System.out.printf("ÀÔÀå·á ÃÑ¾×Àº %d¿ø ÀÔ´Ï´Ù\n", totalFee);
+		System.out.printf("ì…ì¥ë£Œ ì´ì•¡ì€ %dì› ì…ë‹ˆë‹¤\n", totalFee);
 	}
 	
 	public void endofReceipt() {
@@ -89,8 +89,8 @@ public class OutputClass {
 	}
 	
 	public void saveFile(ArrayList<Customer> csInfoArr) throws IOException {
-		// ³¯Â¥,±ÇÁ¾,¿¬·É±¸ºĞ,¼ö·®,°¡°İ,¿ì´ë»çÇ×
-		// ex)20210415,ÁÖ°£±Ç,´ëÀÎ,1,56000,¾øÀ½
+		// ë‚ ì§œ,ê¶Œì¢…,ì—°ë ¹êµ¬ë¶„,ìˆ˜ëŸ‰,ê°€ê²©,ìš°ëŒ€ì‚¬í•­
+		// ex)20210415,ì£¼ê°„ê¶Œ,ëŒ€ì¸,1,56000,ì—†ìŒ
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ConstValueClass.savePATH, true), "MS949"));
 		String text = "";
 		for (int i = 0; i < csInfoArr.size(); i++) {
@@ -104,15 +104,15 @@ public class OutputClass {
 	}
 	
 	public void printSellingData(int sellbyType[][]) {
-		System.out.printf("\n================== ±ÇÁ¾ º° ÆÇ¸ÅÇöÈ² ==================\n");
-		System.out.printf("ÁÖ°£±Ç ÃÑ %s¸Å\n", sellbyType[0][0]);
-		System.out.printf("À¯¾Æ %s¸Å, ¾î¸°ÀÌ %s¸Å, Ã»¼Ò³â %s¸Å, ¾î¸¥ %s¸Å, ³ëÀÎ %s¸Å\n",
+		System.out.printf("\n================== ê¶Œì¢… ë³„ íŒë§¤í˜„í™© ==================\n");
+		System.out.printf("ì£¼ê°„ê¶Œ ì´ %së§¤\n", sellbyType[0][0]);
+		System.out.printf("ìœ ì•„ %së§¤, ì–´ë¦°ì´ %së§¤, ì²­ì†Œë…„ %së§¤, ì–´ë¥¸ %së§¤, ë…¸ì¸ %së§¤\n",
 				sellbyType[0][1], sellbyType[0][2], sellbyType[0][3], sellbyType[0][4], sellbyType[0][5]);
-		System.out.printf("ÁÖ°£±Ç ¸ÅÃâ : %s¿ø\n\n", sellbyType[0][6]);
-		System.out.printf("¾ß°£±Ç ÃÑ %s¸Å\n", sellbyType[1][0]);
-		System.out.printf("À¯¾Æ %s¸Å, ¾î¸°ÀÌ %s¸Å, Ã»¼Ò³â %s¸Å, ¾î¸¥ %s¸Å, ³ëÀÎ %s¸Å\n",
+		System.out.printf("ì£¼ê°„ê¶Œ ë§¤ì¶œ : %sì›\n\n", sellbyType[0][6]);
+		System.out.printf("ì•¼ê°„ê¶Œ ì´ %së§¤\n", sellbyType[1][0]);
+		System.out.printf("ìœ ì•„ %së§¤, ì–´ë¦°ì´ %së§¤, ì²­ì†Œë…„ %së§¤, ì–´ë¥¸ %së§¤, ë…¸ì¸ %së§¤\n",
 				sellbyType[1][1], sellbyType[1][2], sellbyType[1][3], sellbyType[1][4], sellbyType[1][5]);
-		System.out.printf("¾ß°£±Ç ¸ÅÃâ : %s¿ø\n", sellbyType[1][6]);
+		System.out.printf("ì•¼ê°„ê¶Œ ë§¤ì¶œ : %sì›\n", sellbyType[1][6]);
 		System.out.printf("----------------------------------------------------");
 	}
 	

@@ -13,7 +13,7 @@ public class InputClass {
 
 	public int ticketType() {
 		int select;
-		System.out.println("±ÇÁ¾À» ¼±ÅÃÇÏ¼¼¿ä.\n1. ÁÖ°£±Ç\n2. ¾ß°£±Ç");
+		System.out.println("ê¶Œì¢…ì„ ì„ íƒí•˜ì„¸ìš”.\n1. ì£¼ê°„ê¶Œ\n2. ì•¼ê°„ê¶Œ");
 		while (true) {
 			select = scan.nextInt();
 			if (select == 1 || select == 2) {
@@ -26,7 +26,7 @@ public class InputClass {
 	
 	public String numID() {
 		String idNumber;
-		System.out.println("ÁÖ¹Î¹øÈ£ ¾Õ7ÀÚ¸®¸¦ ÀÔ·ÂÇÏ¼¼¿ä(°ø¹é, - ¾øÀÌ ¼ıÀÚ¸¸ ÀÔ·Â)");
+		System.out.println("ì£¼ë¯¼ë²ˆí˜¸ ì•7ìë¦¬ë¥¼ ì…ë ¥í•˜ì„¸ìš”(ê³µë°±, - ì—†ì´ ìˆ«ìë§Œ ì…ë ¥)");
 		while (true) {
 			idNumber = scan.next();
 			if (idNumber.length() == ConstValueClass.MAX_ID_DIGITS) {
@@ -39,7 +39,7 @@ public class InputClass {
 	
 	public int numTickets() {
 		int tickets;
-		System.out.println("¸îÀå ¹ß±ÇÇÏ½Ã°Ú½À´Ï±î? (ÃÖ´ë 10Àå)");
+		System.out.println("ëª‡ì¥ ë°œê¶Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (ìµœëŒ€ 10ì¥)");
 		while (true) {
 			tickets = scan.nextInt();
 			if (tickets <= ConstValueClass.MAX_COUNT && 
@@ -53,11 +53,11 @@ public class InputClass {
 	
 	public int prefOptions() {
 		int option;
-		System.out.println("¿ì´ë»çÇ×À» ¼±ÅÃÇÏ¼¼¿ä.\n1. ¾øÀ½ (³ªÀÌ ¿ì´ë´Â ÀÚµ¿Ã³¸®)\n"
-				+ "2. Àå¾ÖÀÎ\n"
-				+ "3. ±¹°¡À¯°øÀÚ\n"
-				+ "4. ´ÙÀÚ³à\n"
-				+ "5. ÀÓ»êºÎ");
+		System.out.println("ìš°ëŒ€ì‚¬í•­ì„ ì„ íƒí•˜ì„¸ìš”.\n1. ì—†ìŒ (ë‚˜ì´ ìš°ëŒ€ëŠ” ìë™ì²˜ë¦¬)\n"
+				+ "2. ì¥ì• ì¸\n"
+				+ "3. êµ­ê°€ìœ ê³µì\n"
+				+ "4. ë‹¤ìë…€\n"
+				+ "5. ì„ì‚°ë¶€");
 		while (true) {
 			option = scan.nextInt();
 			if (option >= 1 && option <= 5) {
@@ -70,14 +70,14 @@ public class InputClass {
 	
 	public int nextRound() {
 		int nextRound;
-		System.out.printf("°è¼Ó ¹ß±ÇÇÏ½Ã°Ú½À´Ï±î?\n1: Æ¼ÄÏ ¹ß±Ç\n2: Á¾·á\n");
+		System.out.printf("ê³„ì† ë°œê¶Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?\n1: í‹°ì¼“ ë°œê¶Œ\n2: ì¢…ë£Œ\n");
 		nextRound = scan.nextInt();
 		return nextRound;
 	}
 
 	public int exitorProceed() {
 		int exitproceed;
-		System.out.printf("°è¼Ó ÁøÇà(1: »õ·Î¿î ÁÖ¹®, 2: ÇÁ·Î±×·¥ Á¾·á) : ");
+		System.out.printf("ê³„ì† ì§„í–‰(1: ìƒˆë¡œìš´ ì£¼ë¬¸, 2: í”„ë¡œê·¸ë¨ ì¢…ë£Œ) : ");
 		exitproceed = scan.nextInt();
 		return exitproceed;
 	}

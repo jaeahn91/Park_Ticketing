@@ -16,48 +16,48 @@ public class Main {
 		RunCalculator run = new RunCalculator();
 		OutputClass outclass = new OutputClass();
 		
-//		ReadCSV read = new ReadCSV(); // ÀÌÈÄ ¸ÅÃâºĞ¼®¿¡ È°¿ëÇÒ Å¬·¡½º. ¸ÅÃâºĞ¼®±â´É ¾ÆÁ÷ ¹Ì±¸Çö
+//		ReadCSV read = new ReadCSV(); // ì´í›„ ë§¤ì¶œë¶„ì„ì— í™œìš©í•  í´ë˜ìŠ¤. ë§¤ì¶œë¶„ì„ê¸°ëŠ¥ ì•„ì§ ë¯¸êµ¬í˜„
 		
-		int sellbyType [][]; // ±ÇÁ¾º° ÆÇ¸Å³»¿ª ÀúÀå, ÀÌÈÄ ¸ÅÃâºĞ¼®¿¡ È°¿ë
+		int sellbyType [][]; // ê¶Œì¢…ë³„ íŒë§¤ë‚´ì—­ ì €ì¥, ì´í›„ ë§¤ì¶œë¶„ì„ì— í™œìš©
 		
 		while(true) {
-			type = inputclass.ticketType(); // ÁÖ/¾ß°£±Ç ¼±ÅÃ ÀÔ·Â¹Ş±â
-			idNumber = inputclass.numID(); // ÁÖ¹Î¹øÈ£ 7ÀÚ¸® ÀÔ·Â¹Ş±â 
-			numTickets = inputclass.numTickets(); // ¹ß±Ç Èñ¸Á Æ¼ÄÏ Àå¼ö ÀÔ·Â¹Ş±â
-			prefType = inputclass.prefOptions(); // ¿ì´ë»çÇ× ÀÔ·Â¹Ş±â
+			type = inputclass.ticketType(); // ì£¼/ì•¼ê°„ê¶Œ ì„ íƒ ì…ë ¥ë°›ê¸°
+			idNumber = inputclass.numID(); // ì£¼ë¯¼ë²ˆí˜¸ 7ìë¦¬ ì…ë ¥ë°›ê¸° 
+			numTickets = inputclass.numTickets(); // ë°œê¶Œ í¬ë§ í‹°ì¼“ ì¥ìˆ˜ ì…ë ¥ë°›ê¸°
+			prefType = inputclass.prefOptions(); // ìš°ëŒ€ì‚¬í•­ ì…ë ¥ë°›ê¸°
 			
-			age = run.ageCal(idNumber); // ÀÔ·Â¹ŞÀº ÁÖ¹Î¹øÈ£·Î ³ªÀÌ¸¦ °è»êÇØ age¿¡ ÀúÀå
-			type_ageCohort = run.type_AgeCohort(age); // °è»êµÈ ³ªÀÌ¸¦ ÀÌ¿ëÇØ ¿¬·ÉÃş ±¸ºĞ
-			fee = run.feeCal(type, age); // ±ÇÁ¾°ú ³ªÀÌ¸¦ ÀÌ¿ëÇØ ¿ä±İ °è»ê
-			fee_ActuallyPaid = run.prefCal(fee, prefType); // ¿ì´ë¿©ºÎ È®ÀÎÇØ ÇÒÀÎÀû¿ë ±İ¾× »êÁ¤
-			fee_ActuallyPaid = numTickets * fee_ActuallyPaid; // ÇÒÀÎÀû¿ë ±İ¾×¿¡ ¹ß±Ç Àå¼ö¸¦ °öÇØ ÃÑÁöºÒ±İ¾× °è»ê			
-			ageCohort = outclass.printAgeCohort(age); // ¿¬·É±¸ºĞ Ãâ·Â°á°ú¸¦ ½ºÆ®¸µº¯¼ö¿¡ ÀúÀå
+			age = run.ageCal(idNumber); // ì…ë ¥ë°›ì€ ì£¼ë¯¼ë²ˆí˜¸ë¡œ ë‚˜ì´ë¥¼ ê³„ì‚°í•´ ageì— ì €ì¥
+			type_ageCohort = run.type_AgeCohort(age); // ê³„ì‚°ëœ ë‚˜ì´ë¥¼ ì´ìš©í•´ ì—°ë ¹ì¸µ êµ¬ë¶„
+			fee = run.feeCal(type, age); // ê¶Œì¢…ê³¼ ë‚˜ì´ë¥¼ ì´ìš©í•´ ìš”ê¸ˆ ê³„ì‚°
+			fee_ActuallyPaid = run.prefCal(fee, prefType); // ìš°ëŒ€ì—¬ë¶€ í™•ì¸í•´ í• ì¸ì ìš© ê¸ˆì•¡ ì‚°ì •
+			fee_ActuallyPaid = numTickets * fee_ActuallyPaid; // í• ì¸ì ìš© ê¸ˆì•¡ì— ë°œê¶Œ ì¥ìˆ˜ë¥¼ ê³±í•´ ì´ì§€ë¶ˆê¸ˆì•¡ ê³„ì‚°			
+			ageCohort = outclass.printAgeCohort(age); // ì—°ë ¹êµ¬ë¶„ ì¶œë ¥ê²°ê³¼ë¥¼ ìŠ¤íŠ¸ë§ë³€ìˆ˜ì— ì €ì¥
 			
-			outclass.printPrice(fee_ActuallyPaid); // ÃÑÁöºÒ±İ¾× ¾È³» ¸Ş½ÃÁö ÄÜ¼Ö¿¡ Ãâ·Â
+			outclass.printPrice(fee_ActuallyPaid); // ì´ì§€ë¶ˆê¸ˆì•¡ ì•ˆë‚´ ë©”ì‹œì§€ ì½˜ì†”ì— ì¶œë ¥
 			
-			totalfee += fee_ActuallyPaid; // ÃÑÁöºÒ±İ¾×À» intº¯¼ö¿¡ ÀúÀå, ¹ß±ÇÀÌ ¿©·¯Â÷·Ê ÀÌ·ïÁö´Â °æ¿ì¿¡µµ °è¼Ó
-			// ÀúÀåÇÏµµ·Ï Ã³¸®			
+			totalfee += fee_ActuallyPaid; // ì´ì§€ë¶ˆê¸ˆì•¡ì„ intë³€ìˆ˜ì— ì €ì¥, ë°œê¶Œì´ ì—¬ëŸ¬ì°¨ë¡€ ì´ë¤„ì§€ëŠ” ê²½ìš°ì—ë„ ê³„ì†
+			// ì €ì¥í•˜ë„ë¡ ì²˜ë¦¬			
 			run.savingFormat(type, age, numTickets, fee_ActuallyPaid, prefType, ConstValueClass.csInfoArr);
-			// ÆÄÀÏ ÀúÀå ¸Ş¼Òµå¿¡¼­ ¼³Á¤ÇÑ ÀÚ·á±¸Á¶¿¡ ¸Âµµ·Ï ÀÔ·Â º¯¼öµé ÁöÁ¤
-			// ÆÄÀÏÀúÀå°æ·Î´Â ConstValueClass¿¡ savePATH·Î ÀúÀå, OutputClassÀÇ saveFile ¸Ş¼Òµå¿¡¼­ È£Ãâ
+			// íŒŒì¼ ì €ì¥ ë©”ì†Œë“œì—ì„œ ì„¤ì •í•œ ìë£Œêµ¬ì¡°ì— ë§ë„ë¡ ì…ë ¥ ë³€ìˆ˜ë“¤ ì§€ì •
+			// íŒŒì¼ì €ì¥ê²½ë¡œëŠ” ConstValueClassì— savePATHë¡œ ì €ì¥, OutputClassì˜ saveFile ë©”ì†Œë“œì—ì„œ í˜¸ì¶œ
 			transaction += outclass.receipt(type,  ageCohort, numTickets, fee_ActuallyPaid, prefType);			
-			// ÄÜ¼Ö¿¡ ¿µ¼öÁõ °Å·¡³»¿ª Ãâ·Â ¸Ş¼Òµå Çü½Ä¿¡ ¸Â°Ô ÀÔ·Â º¯¼öµé ÁöÁ¤, ½ºÆ®¸µº¯¼ö¿¡ ³»¿ë ÀúÀå
-			// ÄÜ¼Ö¿¡ ¿µ¼öÁõ Ãâ·ÂÇØº¸¸é Ã¹¹øÂ° °Å·¡³»¿ª type(±ÇÁ¾) ¾Õ¿¡ nullºÙ¾î Ãâ·ÂµÇ´Â ¹®Á¦. ¾ÆÁ÷ ¼öÁ¤ ¾ÈµÊ 
+			// ì½˜ì†”ì— ì˜ìˆ˜ì¦ ê±°ë˜ë‚´ì—­ ì¶œë ¥ ë©”ì†Œë“œ í˜•ì‹ì— ë§ê²Œ ì…ë ¥ ë³€ìˆ˜ë“¤ ì§€ì •, ìŠ¤íŠ¸ë§ë³€ìˆ˜ì— ë‚´ìš© ì €ì¥
+			// ì½˜ì†”ì— ì˜ìˆ˜ì¦ ì¶œë ¥í•´ë³´ë©´ ì²«ë²ˆì§¸ ê±°ë˜ë‚´ì—­ type(ê¶Œì¢…) ì•ì— nullë¶™ì–´ ì¶œë ¥ë˜ëŠ” ë¬¸ì œ. ì•„ì§ ìˆ˜ì • ì•ˆë¨ 
 			
-			nextRound = inputclass.nextRound(); // ÀçÂ÷ ¹ß±ÇÇÒÁö ¿©ºÎ È®ÀÎÇÏ´Â ¸Ş¼Òµå(1: Æ¼ÄÏ¹ß±Ç 2: Á¾·á)
+			nextRound = inputclass.nextRound(); // ì¬ì°¨ ë°œê¶Œí• ì§€ ì—¬ë¶€ í™•ì¸í•˜ëŠ” ë©”ì†Œë“œ(1: í‹°ì¼“ë°œê¶Œ 2: ì¢…ë£Œ)
 			
-			if (nextRound == 2) { // 2¸¦ ÀÔ·Â¹ŞÀº °æ¿ì(°è¼Ó ¹ß±Ç ¾ÈÇÔ)
-				outclass.startofReceipt(); // ¿µ¼öÁõ Ã¹ ÁÙ Ãâ·Â ¸Ş¼Òµå
-				System.out.println(transaction); // °Å·¡³»¿ª Ãâ·Â		
-				outclass.receiptTotal(totalfee); // ÀÔÀå·á ÃÑ¾×Àº _¿ø ÀÔ´Ï´Ù
-				outclass.endofReceipt(); // ¿µ¼öÁõ ¸¶Áö¸·ÁÙ Ãâ·Â
-				exitproceed = inputclass.exitorProceed(); // ¿µ¼öÁõ±îÁö ÄÜ¼Ö¿¡ Ãâ·ÂµÈ ÈÄ ´ÙÀ½ ÀÛ¾÷ È®ÀÎÇÏ´Â ¸Ş¼Òµå
-				// 1(»õ·Î¿î ÁÖ¹®) 2(ÇÁ·Î±×·¥ Á¾·á)
-				transaction = ""; // ÀÌÀü ¿µ¼öÁõÀº Ãâ·ÂµÆÀ¸´Ï ´Ù½Ã °Å·¡³»¿ª ÃÊ±âÈ­
-				totalfee = 0; // ÀÔÀå·á ÃÑ¾× ÃÊ±âÈ­
-				if (exitproceed == 2) { // ÇÁ·Î±×·¥ Á¾·á¸¦ ¼±ÅÃÇß´Ù¸é
-					outclass.saveFile(ConstValueClass.csInfoArr); // ÆÄÀÏ¿¡ ÆÇ¸Å³»¿ª ÀúÀå
-					break; // while¹®À» ºüÁ®³ª°¨À¸·Î½á ÇÁ·Î±×·¥ Á¾·á
+			if (nextRound == 2) { // 2ë¥¼ ì…ë ¥ë°›ì€ ê²½ìš°(ê³„ì† ë°œê¶Œ ì•ˆí•¨)
+				outclass.startofReceipt(); // ì˜ìˆ˜ì¦ ì²« ì¤„ ì¶œë ¥ ë©”ì†Œë“œ
+				System.out.println(transaction); // ê±°ë˜ë‚´ì—­ ì¶œë ¥		
+				outclass.receiptTotal(totalfee); // ì…ì¥ë£Œ ì´ì•¡ì€ _ì› ì…ë‹ˆë‹¤
+				outclass.endofReceipt(); // ì˜ìˆ˜ì¦ ë§ˆì§€ë§‰ì¤„ ì¶œë ¥
+				exitproceed = inputclass.exitorProceed(); // ì˜ìˆ˜ì¦ê¹Œì§€ ì½˜ì†”ì— ì¶œë ¥ëœ í›„ ë‹¤ìŒ ì‘ì—… í™•ì¸í•˜ëŠ” ë©”ì†Œë“œ
+				// 1(ìƒˆë¡œìš´ ì£¼ë¬¸) 2(í”„ë¡œê·¸ë¨ ì¢…ë£Œ)
+				transaction = ""; // ì´ì „ ì˜ìˆ˜ì¦ì€ ì¶œë ¥ëìœ¼ë‹ˆ ë‹¤ì‹œ ê±°ë˜ë‚´ì—­ ì´ˆê¸°í™”
+				totalfee = 0; // ì…ì¥ë£Œ ì´ì•¡ ì´ˆê¸°í™”
+				if (exitproceed == 2) { // í”„ë¡œê·¸ë¨ ì¢…ë£Œë¥¼ ì„ íƒí–ˆë‹¤ë©´
+					outclass.saveFile(ConstValueClass.csInfoArr); // íŒŒì¼ì— íŒë§¤ë‚´ì—­ ì €ì¥
+					break; // whileë¬¸ì„ ë¹ ì ¸ë‚˜ê°ìœ¼ë¡œì¨ í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 				}
 			}
 			

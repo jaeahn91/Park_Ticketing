@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadCSV {
+public class ReadCSV {  // í˜„ì¬ ì‚¬ìš©ì¤‘ì¸ í´ë˜ìŠ¤ê°€ ì•„ë‹™ë‹ˆë‹¤..
 	public BufferedReader reader = null;
 	
 	public ReadCSV() throws FileNotFoundException {
@@ -32,11 +32,11 @@ public class ReadCSV {
 		int total_price = 0;
 		int total_price_night = 0;
 		while ((line = reader.readLine()) != null) {
-			// [0]³¯Â¥ [1] ±ÇÁ¾ [2] ¿¬·É±¸ºĞ [3] ¼ö·® [4] °¡°İ [5] ¿ì´ë»çÇ×
+			// [0]ë‚ ì§œ [1] ê¶Œì¢… [2] ì—°ë ¹êµ¬ë¶„ [3] ìˆ˜ëŸ‰ [4] ê°€ê²© [5] ìš°ëŒ€ì‚¬í•­
 			if (count > 0) {
 				line_data = line.split(",");
 				if (Integer.parseInt(line_data[1]) == 1) {
-					ticketday += Integer.parseInt(line_data[3]); // ÁÖ°£±Ç ÃÑ Æ¼ÄÏ¼ö
+					ticketday += Integer.parseInt(line_data[3]); // ì£¼ê°„ê¶Œ ì´ í‹°ì¼“ìˆ˜
 				}
 				if (Integer.parseInt(line_data[2]) == 1) {
 					baby += Integer.parseInt(line_data[3]);
@@ -49,7 +49,7 @@ public class ReadCSV {
 				}
 				total_price += Integer.parseInt(line_data[4]);
 			} else if (Integer.parseInt(line_data[1]) == 2) {
-				ticketnight += Integer.parseInt(line_data[3]); // ¾ß°£±Ç ÃÑ Æ¼ÄÏ¼ö
+				ticketnight += Integer.parseInt(line_data[3]); // ì•¼ê°„ê¶Œ ì´ í‹°ì¼“ìˆ˜
 				
 				if (Integer.parseInt(line_data[2]) == 1) {
 					baby_night += Integer.parseInt(line_data[3]);

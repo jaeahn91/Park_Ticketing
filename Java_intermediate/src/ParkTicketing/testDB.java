@@ -8,6 +8,7 @@ public class testDB {
 		readDB.printOnConsole();
 		readDB.getSum();
 		readDB.getSumByType();
+		readDB.getSumByDate();
 		
 
 	}

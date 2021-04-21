@@ -59,7 +59,12 @@ public class ReadDatabaseClass {
 		}
 	}
 	
-	public void getSumByType() {
+	public void getSumByType() { //  주간권, 야간권 권종별 판매현황 출력
+		String [] list = {ConstValueClass.cohort_INFANT, 
+				ConstValueClass.cohort_CHILD, 
+				ConstValueClass.cohort_TEEN,
+				ConstValueClass.cohort_ADULT, 
+				ConstValueClass.cohort_ELDERLY};
 		
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //		                                  주간권 판매현황                                  
@@ -76,66 +81,34 @@ public class ReadDatabaseClass {
 			e.printStackTrace();
 		}
 		
-		try {
-			int sumDayInfant = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '주간권' AND `age_Cohort` LIKE '유아'");
-			while(rset.next()) {
-				sumDayInfant = sumDayInfant + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("유아 %d 매, ", sumDayInfant);
-		} catch (Exception e) {
-			e.printStackTrace();
+		for (int i = 0; i < list.length; i++) {
+			try {
+
+				int sumDayInfant = 0;
+				if (i != list.length - 1) { 
+					ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
+							+ "LIKE '주간권' AND `age_Cohort` LIKE '" + list[i] + "'");
+					while(rset.next()) {
+						sumDayInfant = sumDayInfant + Integer.parseInt(rset.getString(4));
+					}
+					System.out.printf("%s %d 매, ", list[i], sumDayInfant);
+				} 
+				else if (i == list.length - 1){
+					ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
+							+ "LIKE '주간권' AND `age_Cohort` LIKE '" + list[i] + "'");
+					while(rset.next()) {
+						sumDayInfant = sumDayInfant + Integer.parseInt(rset.getString(4));
+					}
+					System.out.printf("%s %d 매\n", list[i], sumDayInfant);
+				}
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			
 		}
-		
-		try {
-			int sumDayChild = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '주간권' AND `age_Cohort` LIKE '어린이'");
-			while(rset.next()) {
-				sumDayChild = sumDayChild + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("어린이 %d 매, ", sumDayChild);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			int sumDayTeen = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '주간권' AND `age_Cohort` LIKE '청소년'");
-			while(rset.next()) {
-				sumDayTeen = sumDayTeen + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("청소년 %d 매, ", sumDayTeen);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			int sumDayAdult = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '주간권' AND `age_Cohort` LIKE '어른'");
-			while(rset.next()) {
-				sumDayAdult = sumDayAdult + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("어른 %d 매, ", sumDayAdult);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			int sumDayElderly = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '주간권' AND `age_Cohort` LIKE '노인'");
-			while(rset.next()) {
-				sumDayElderly = sumDayElderly + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("노인 %d 매\n", sumDayElderly);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+
 		try {
 			int sum = 0;
 			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` LIKE '주간권'");
@@ -154,75 +127,44 @@ public class ReadDatabaseClass {
 		
 		try {
 			int sum = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` LIKE '야간권'");
+			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
+					+ "LIKE '야간권'");
 			while(rset.next()) {
 				sum = sum + Integer.parseInt(rset.getString(4));
 			}
-			System.out.printf("야간권 총 %d 매\n", sum);
+			System.out.printf("%s 총 %d 매\n", ConstValueClass.NIGHTPASS, sum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		try {
-			int sumDayInfant = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '야간권' AND `age_Cohort` LIKE '유아'");
-			while(rset.next()) {
-				sumDayInfant = sumDayInfant + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("유아 %d 매, ", sumDayInfant);
-		} catch (Exception e) {
-			e.printStackTrace();
+		for (int i = 0; i < list.length; i++) {
+			try {
+
+				int sumDayInfant = 0;
+				if (i != list.length - 1) { 
+					ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
+							+ "LIKE '야간권' AND `age_Cohort` LIKE '" + list[i] + "'");
+					while(rset.next()) {
+						sumDayInfant = sumDayInfant + Integer.parseInt(rset.getString(4));
+					}
+					System.out.printf("%s %d 매, ", list[i], sumDayInfant);
+				} 
+				else if (i == list.length - 1){
+					ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
+							+ "LIKE '야간권' AND `age_Cohort` LIKE '" + list[i] + "'");
+					while(rset.next()) {
+						sumDayInfant = sumDayInfant + Integer.parseInt(rset.getString(4));
+					}
+					System.out.printf("%s %d 매\n", list[i], sumDayInfant);
+				}
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			
 		}
-		
-		try {
-			int sumDayChild = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '야간권' AND `age_Cohort` LIKE '어린이'");
-			while(rset.next()) {
-				sumDayChild = sumDayChild + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("어린이 %d 매, ", sumDayChild);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			int sumDayTeen = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '야간권' AND `age_Cohort` LIKE '청소년'");
-			while(rset.next()) {
-				sumDayTeen = sumDayTeen + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("청소년 %d 매, ", sumDayTeen);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			int sumDayAdult = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '야간권' AND `age_Cohort` LIKE '어른'");
-			while(rset.next()) {
-				sumDayAdult = sumDayAdult + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("어른 %d 매, ", sumDayAdult);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			int sumDayElderly = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` "
-					+ "LIKE '야간권' AND `age_Cohort` LIKE '노인'");
-			while(rset.next()) {
-				sumDayElderly = sumDayElderly + Integer.parseInt(rset.getString(4));
-			}
-			System.out.printf("노인 %d 매\n", sumDayElderly);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+
 		try {
 			int sum = 0;
 			ResultSet rset = stmt.executeQuery("SELECT * FROM `report` WHERE `ticket_Type` LIKE '야간권'");
@@ -239,17 +181,18 @@ public class ReadDatabaseClass {
 	
 	public void getSumByDate() {
 		try {
-			int sum = 0;
-			ResultSet rset = stmt.executeQuery("SELECT * FROM `report`");
-
+			System.out.println("==================== 일자별 매출 현황 ====================");
+			ResultSet rset = stmt.executeQuery("SELECT date, SUM(price) FROM `report` GROUP BY `date`"
+					+ "ORDER BY `date` ASC");
 			while(rset.next()) {
-				sum = sum + Integer.parseInt(rset.getString(5));
+				System.out.printf("%s : 총 매출 %s\n", rset.getString(1), rset.getString(2)); 
 			}
-			System.out.printf("총 판매금액 %d 원\n", sum);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 	
 }

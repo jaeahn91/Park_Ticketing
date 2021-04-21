@@ -7,6 +7,8 @@ public class testDB {
 		ReadDatabaseClass readDB = new ReadDatabaseClass();
 		readDB.printOnConsole();
 		readDB.getSum();
+		readDB.getSumByType();
+		
 
 	}
 

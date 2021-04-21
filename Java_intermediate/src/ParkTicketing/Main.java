@@ -1,6 +1,7 @@
 package ParkTicketing;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -9,12 +10,14 @@ public class Main {
 
 	public static int type, numTickets, prefType, age, type_ageCohort, fee, fee_ActuallyPaid;
 	public static int totalfee, nextRound, exitproceed;
-	public static String idNumber, ageCohort, transaction;
-	public static void main(String[] args) throws IOException {
+	public static String idNumber, ageCohort;
+	public static String transaction = "";
+	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
 		
 		InputClass inputclass = new InputClass();
 		RunCalculator run = new RunCalculator();
 		OutputClass outclass = new OutputClass();
+		WriteClass write = new WriteClass();
 		
 //		ReadCSV read = new ReadCSV(); // 이후 매출분석에 활용할 클래스. 매출분석기능 아직 미구현
 		
@@ -39,11 +42,11 @@ public class Main {
 			// 저장하도록 처리			
 			run.savingFormat(type, age, numTickets, fee_ActuallyPaid, prefType, ConstValueClass.csInfoArr);
 			// 파일 저장 메소드에서 설정한 자료구조에 맞도록 입력 변수들 지정
-			// 파일저장경로는 ConstValueClass에 savePATH로 저장, OutputClass의 saveFile 메소드에서 호출
+			// 파일저장경로는 ConstValueClass에 savePATH로 저장, WriteClass의 saveFile 메소드에서 호출
 			transaction += outclass.receipt(type,  ageCohort, numTickets, fee_ActuallyPaid, prefType);			
 			// 콘솔에 영수증 거래내역 출력 메소드 형식에 맞게 입력 변수들 지정, 스트링변수에 내용 저장
 			// 콘솔에 영수증 출력해보면 첫번째 거래내역 type(권종) 앞에 null붙어 출력되는 문제. 아직 수정 안됨 
-			
+
 			nextRound = inputclass.nextRound(); // 재차 발권할지 여부 확인하는 메소드(1: 티켓발권 2: 종료)
 			
 			if (nextRound == 2) { // 2를 입력받은 경우(계속 발권 안함)
@@ -56,7 +59,9 @@ public class Main {
 				transaction = ""; // 이전 영수증은 출력됐으니 다시 거래내역 초기화
 				totalfee = 0; // 입장료 총액 초기화
 				if (exitproceed == 2) { // 프로그램 종료를 선택했다면
-					outclass.saveFile(ConstValueClass.csInfoArr); // 파일에 판매내역 저장
+//					outclass.saveFile(ConstValueClass.csInfoArr); // 파일에 판매내역 저장
+					write.saveFile(ConstValueClass.csInfoArr);
+					write.insertDB(ConstValueClass.csInfoArr);
 					break; // while문을 빠져나감으로써 프로그램 종료
 				}
 			}

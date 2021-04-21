@@ -88,21 +88,7 @@ public class OutputClass {
 		System.out.println("==============================================\n");
 	}
 	
-	public void saveFile(ArrayList<Customer> csInfoArr) throws IOException {
-		// 날짜,권종,연령구분,수량,가격,우대사항
-		// ex)20210415,주간권,대인,1,56000,없음
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ConstValueClass.savePATH, true), "MS949"));
-		String text = "";
-		for (int i = 0; i < csInfoArr.size(); i++) {
-			Customer info = csInfoArr.get(i);
-			text += info.getDate() + "," + info.getTicketType() + "," + info.getAgeCohortType() + 
-					"," + info.getNumTickets() + "," + info.getTicketPrice() + "," + info.getPrefType() + "\n";
-			bw.write(text);
-			text = "";
-		}
-		bw.close();
-	}
-	
+
 	public void printSellingData(int sellbyType[][]) {
 		System.out.printf("\n================== 권종 별 판매현황 ==================\n");
 		System.out.printf("주간권 총 %s매\n", sellbyType[0][0]);

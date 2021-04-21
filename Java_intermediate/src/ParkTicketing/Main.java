@@ -61,7 +61,7 @@ public class Main {
 				if (exitproceed == 2) { // 프로그램 종료를 선택했다면
 //					outclass.saveFile(ConstValueClass.csInfoArr); // 파일에 판매내역 저장
 					write.saveFile(ConstValueClass.csInfoArr);
-					write.insertDB(ConstValueClass.csInfoArr);
+
 					break; // while문을 빠져나감으로써 프로그램 종료
 				}
 			}

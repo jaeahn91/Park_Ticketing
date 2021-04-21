@@ -131,6 +131,9 @@ public class RunCalculator {
 		}
 		csInfoArr.add(csInfo);
 		
+		DatabaseOutputClass dbOut = new DatabaseOutputClass();
+		dbOut.addToDatabase(csInfo);
+		
 	}
 	
 }
